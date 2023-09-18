@@ -7,7 +7,9 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
 
-const authRoute = require('./routes/auth');
+const adminRoute = require('./routes/adminRoutes');
+const userRoute = require('./routes/userRoutes');
+const authRoute = require('./routes/authRoutes');
 
 
 
@@ -24,6 +26,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+
+const url = "mongodb+srv://pksadmin:Admin123@cluster0.oj5e63t.mongodb.net/?retryWrites=true&w=majority"
+
+// Connect to MongoDB
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+// Event handlers for successful connection and error
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+    console.log('Connected to MongoDB');
+});
+
+app.use("/api/admin", adminRoute);
+app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 
 app.listen(8800, () => {
