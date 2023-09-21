@@ -6,15 +6,15 @@ const morgan = require('morgan');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 
-
 const adminRoute = require('./routes/adminRoutes');
 const userRoute = require('./routes/userRoutes');
 const authRoute = require('./routes/authRoutes');
+const productRoute = require('./routes/productRoutes');
+const cartRoute = require('./routes/cartRoutes');
+const orderRoute = require('./routes/orderRoutes');
 
 
-
-
-// config
+// config middleware
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -26,10 +26,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-
+// Connect to MongoDB
 const url = "mongodb+srv://pksadmin:Admin123@cluster0.oj5e63t.mongodb.net/?retryWrites=true&w=majority"
 
-// Connect to MongoDB
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -42,9 +41,13 @@ db.once('open', () => {
     console.log('Connected to MongoDB');
 });
 
+// routes
 app.use("/api/admin", adminRoute);
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/product", productRoute);
+app.use("/api/cart", cartRoute);
+app.use("/api/order", orderRoute);
 
 app.listen(8800, () => {
     console.log('Backend server is running! on 8800');
