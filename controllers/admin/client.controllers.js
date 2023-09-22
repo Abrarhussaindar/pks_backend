@@ -1,5 +1,5 @@
 const express = require('express');
-const User = require('../models/User');
+const User = require('../../models/User');
 
 // admin controllers
 const Dashboard = async (req, res) => {

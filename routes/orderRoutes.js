@@ -7,6 +7,6 @@ router.post("/", verifyToken, OrderControllers.addOrder);
 router.put("/", verifyTokenAndAdmin, OrderControllers.updateOrder);
 router.delete("/", verifyTokenAndAdmin, OrderControllers.deleteOrder);
 router.get("/:userId", verifyTokenAndAuth, OrderControllers.getOrder);
-router.get("/", verifyTokenAndAdmin, OrderControllers.getAllOrders);
+router.get("/", OrderControllers.getAllOrders);
 
 module.exports = router;

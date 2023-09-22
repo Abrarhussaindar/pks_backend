@@ -21,6 +21,11 @@ const UserSchema = new mongoose.Schema({
         max: 50,
         unique: true,
     },
+    phone: {
+        type: String,
+        require: true,
+        max: 10
+    },
     password:{
         type: String,
         require: true,
@@ -30,9 +35,17 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
+    role:{
+        type: String,
+        default: "user"
+    },
     isAdmin:{
         type: Boolean,
         default: false,
+    },
+    address:{
+        type: Object,
+        default: ""
     }
 },
     {timestamps: true}
