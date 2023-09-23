@@ -61,8 +61,10 @@ app.use("/api/orders", orderRoute);
 mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(()=>{
+}).then(() => {
     app.listen(8800, () => {
-        console.log('Backend server is running! on 8800');
+        console.log('Backend server is running on port 8800');
     });
-}).catch((error) => console.log(`${error} did not connect`));
+}).catch((error) => {
+    console.error(`${error} did not connect`);
+});
