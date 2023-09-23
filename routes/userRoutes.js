@@ -6,7 +6,7 @@ const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require('../mid
 //fetch user
 
 router.get("/find/:id", verifyTokenAndAdmin, UserController.GetUser);
-router.get("/", UserController.GetAllUsers);
+router.get("/all", UserController.GetAllUsers);
 router.put("/:id", UserController.Updateuser);
 router.delete("/:id", verifyTokenAndAuth, UserController.DeleteUser)
 

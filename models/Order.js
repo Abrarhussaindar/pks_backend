@@ -20,6 +20,9 @@ const OrderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    paymentMode: {
+        type: String,
+    },
     address: {
         type: Object,
         required: true

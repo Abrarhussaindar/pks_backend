@@ -36,17 +36,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Connect to MongoDB
 const url = "mongodb+srv://pksadmin:Admin123@cluster0.oj5e63t.mongodb.net/?retryWrites=true&w=majority"
 
-mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+
 
 // Event handlers for successful connection and error
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-    console.log('Connected to MongoDB');
-});
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// db.once('open', () => {
+//     console.log('Connected to MongoDB');
+// });
 
 // route urls
 app.use("/api/admin/client", clientRoute);
@@ -61,7 +58,11 @@ app.use("/api/cart", cartRoute);
 app.use("/api/orders", orderRoute);
 
 
-
-app.listen(8800, () => {
-    console.log('Backend server is running! on 8800');
-});
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(()=>{
+    app.listen(8800, () => {
+        console.log('Backend server is running! on 8800');
+    });
+}).catch((error) => console.log(`${error} did not connect`));
