@@ -2,6 +2,15 @@ const express = require('express');
 const Cart = require('../models/Cart');
 const Product = require('../models/Product');
 
+// {
+//     "userId": "650db1f17d52aa044bfb1abe",
+//     "products": [
+//         {
+//           "productId": "650c25b9911a0dcc346d9d03",
+//           "quantity": 1
+//         }
+//       ]
+//   }
 const createCart = async (req, res) =>{
     
     try{
@@ -9,12 +18,15 @@ const createCart = async (req, res) =>{
         // const product = await Product.find({_id: req.params.id});
 
         // console.log(product)
+        console.log(req.body)
         const newCart =  new Cart({
             userId: req.body.userId,
-            products: {
-                productId: req.params.id,
-                quantity: 1
-            }
+            products: [
+                {
+                    productId: req.params.id,
+                    quantity: req.body.quantity
+                }
+            ]
         });
         const savedCart = await newCart.save();
         console.log("saved ", savedCart)
