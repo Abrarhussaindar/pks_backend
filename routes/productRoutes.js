@@ -4,7 +4,7 @@ const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require('../mid
 
 
 router.post("/", verifyTokenAndAdmin, ProductsController.uploadProduct);
-router.put("/", verifyTokenAndAdmin, ProductsController.updateProduct);
+router.put("/:id", ProductsController.updateProduct);
 router.delete("/", verifyTokenAndAdmin, ProductsController.deleteProduct);
 router.get("/:id", ProductsController.getProduct);
 router.get("/", ProductsController.getAllProducts);

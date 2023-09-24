@@ -7,16 +7,3 @@ router.get("/:name", CategoryControllers.GetCategory);
 
 module.exports = router;
 
-// {
-//     "name": "mens",
-//     "subCategories": [
-//         {
-//           "subName": "shirts",
-//           "link": "/shirts"
-//         },
-//         {
-//           "subName": "pants",
-//           "link": "/pants"
-//         }
-//       ]
-//   }

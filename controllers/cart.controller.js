@@ -1,10 +1,16 @@
 const express = require('express');
 const Cart = require('../models/Cart');
+const Product = require('../models/Product');
 
 const createCart = async (req, res) =>{
-    const newCart =  new Cart(req.body)
-
+    
     try{
+        console.log(req.params)
+        const product = await Product.find({_id: req.params.id});
+        console.log(product)
+        const newCart =  new Cart({
+            products: product
+        });
         const savedCart = await newCart.save();
         res.status(201).json(savedCart);
     }catch(err){
