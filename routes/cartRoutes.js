@@ -5,8 +5,8 @@ const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require('../mid
 
 router.post("/:id", CartControllers.createCart);
 router.put("/:id", CartControllers.updateCart);
-router.delete("/", verifyToken, CartControllers.deleteCart);
+router.delete("/:id", CartControllers.deleteCart);
 router.get("/:userId", CartControllers.getCart);
-router.get("/", verifyTokenAndAdmin, CartControllers.getAllCarts);
+router.get("/", CartControllers.getAllCarts);
 
 module.exports = router;
