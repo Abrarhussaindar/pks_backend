@@ -10,6 +10,13 @@ module.exports = router;
 // {
 //     "name": "mens",
 //     "subCategories": [
-//         "shirts", "pants", "inner wear", "sports wear"
+//         {
+//           "subName": "shirts",
+//           "link": "/shirts"
+//         },
+//         {
+//           "subName": "pants",
+//           "link": "/pants"
+//         }
 //       ]
 //   }

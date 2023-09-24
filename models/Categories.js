@@ -7,7 +7,12 @@ const CategorySchema = new mongoose.Schema({
     },
     subCategories: [
         {
-            type: String
+            subName: {
+                type: String,
+            },
+            link: {
+                type: String,
+            }
         }
     ]
 },
