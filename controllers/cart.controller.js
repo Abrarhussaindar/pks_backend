@@ -6,14 +6,18 @@ const createCart = async (req, res) =>{
     
     try{
         console.log(req.params)
-        const product = await Product.find({_id: req.params.id});
+        // const product = await Product.find({_id: req.params.id});
 
-        console.log(product)
+        // console.log(product)
         const newCart =  new Cart({
             userId: req.body.userId,
-            products: product
+            products: {
+                productId: req.params.id,
+                quantity: 1
+            }
         });
         const savedCart = await newCart.save();
+        console.log("saved ", savedCart)
         res.status(201).json(savedCart);
     }catch(err){
         res.status(500).json("not allowed to upload the products")
