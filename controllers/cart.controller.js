@@ -7,8 +7,10 @@ const createCart = async (req, res) =>{
     try{
         console.log(req.params)
         const product = await Product.find({_id: req.params.id});
+
         console.log(product)
         const newCart =  new Cart({
+            userId: req.body.userId,
             products: product
         });
         const savedCart = await newCart.save();
