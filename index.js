@@ -19,6 +19,7 @@ const productRoute = require('./routes/productRoutes');
 const cartRoute = require('./routes/cartRoutes');
 const orderRoute = require('./routes/orderRoutes');
 const addressRoute = require('./routes/address');
+const categoryRoute = require('./routes/categoryRoutes');
 
 
 // config middleware
@@ -56,6 +57,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/category", categoryRoute);
 
 
 mongoose.connect(url, {
