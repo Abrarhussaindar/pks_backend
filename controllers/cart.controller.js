@@ -25,8 +25,7 @@ const updateCart = async (req, res) =>{
             req.params.id,
             {
                 $set: req.body,
-            },
-            { new: true}
+            }
         );
         res.status(200).json(updatedCart)
     }catch(err){
