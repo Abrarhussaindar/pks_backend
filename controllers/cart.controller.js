@@ -10,30 +10,40 @@ const Product = require('../models/Product');
 //           "quantity": 1
 //         }
 //       ]
-//   }
-const createCart = async (req, res) =>{
-    
-    try{
-        console.log(req.params)
-        // const product = await Product.find({_id: req.params.id});
+// }
 
-        // console.log(product)
-        console.log(req.body)
-        const newCart =  new Cart({
-            userId: req.body.userId,
-            products: [
-                {
-                    productId: req.params.id,
-                    quantity: req.body.quantity
-                }
-            ]
-        });
-        const savedCart = await newCart.save();
-        console.log("saved ", savedCart)
-        res.status(201).json(savedCart);
-    }catch(err){
-        res.status(500).json("not allowed to upload the products")
+const createCart = async (req, res) =>{
+    const exCart = await Cart.findOne({userId: req.body.userId});
+    if(exCart){
+        try{
+            const product = await Product.findById(req.params.id);
+            const newProduct = {
+                productId: product._id,
+            }
+            exCart.products.push(newProduct)
+            const savedCart = await exCart.save();
+            res.status(201).json(savedCart);
+        }catch(err){
+            console.log(err)
+        }
+    }else{
+        try{
+            const newCart =  new Cart({
+                userId: req.body.userId,
+                products: [
+                    {
+                        productId: req.params.id,
+                        quantity: req.body.quantity
+                    }
+                ]
+            });
+            const savedCart = await newCart.save();
+            res.status(201).json(savedCart);
+        }catch(err){
+            res.status(500).json("not allowed to upload the products")
+        }
     }
+    
 }
 
 

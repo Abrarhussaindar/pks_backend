@@ -10,3 +10,4 @@ router.get("/:userId", CartControllers.getCart);
 router.get("/", CartControllers.getAllCarts);
 
 module.exports = router;
+
