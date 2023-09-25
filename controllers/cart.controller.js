@@ -13,12 +13,15 @@ const Product = require('../models/Product');
 // }
 
 const createCart = async (req, res) =>{
+    console.log('body: ', req.body)
     const exCart = await Cart.findOne({userId: req.body.userId});
     if(exCart){
         try{
+
             const product = await Product.findById(req.params.id);
             const newProduct = {
                 productId: product._id,
+                price: product.price
             }
             exCart.products.push(newProduct)
             const savedCart = await exCart.save();
@@ -28,11 +31,13 @@ const createCart = async (req, res) =>{
         }
     }else{
         try{
+            const product = await Product.findById(req.params.id);
             const newCart =  new Cart({
                 userId: req.body.userId,
                 products: [
                     {
                         productId: req.params.id,
+                        price: product.price,
                         quantity: req.body.quantity
                     }
                 ]

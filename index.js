@@ -13,6 +13,7 @@ const generalRoute = require('./routes/admin/generalRoutes');
 const managementRoute = require('./routes/admin/managementRoutes');
 const salesRoute = require('./routes/admin/salesRoutes');
 
+
 const userRoute = require('./routes/userRoutes');
 const authRoute = require('./routes/authRoutes');
 const productRoute = require('./routes/productRoutes');
