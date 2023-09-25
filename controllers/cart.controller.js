@@ -60,6 +60,36 @@ const updateCart = async (req, res) =>{
         res.status(500).json("not allowed to update the cart")
     }
 }
+// 6511336ab1458f7e1a949122
+const updateProductQuantity = async (req, res) =>{
+    try{
+        const exCart = await Cart.findById(req.params.id);
+        console.log("ex cart: ", exCart.products);
+        exCart.products.forEach((product)=>{
+            if(product.productId === req.body.productId){
+                product.quantity = req.body.quantity;
+            }
+        })
+        const upCart = await exCart.save();
+        console.log("updated cart: ", upCart);
+        res.status(201).json(upCart);
+    }catch(err){
+        res.status(500).json("not allowed")
+    }
+
+    // try{
+    //     const updatedCart = await Cart.findByIdAndUpdate(
+    //         req.params.id,
+    //         {
+    //             $set: req.body,
+    //         }
+
+    //     );
+    //     res.status(200).json(updatedCart)
+    // }catch(err){
+    //     res.status(500).json("not allowed to update the cart")
+    // }
+}
 
 const deleteCart = async (req, res) =>{
     try{
@@ -88,4 +118,4 @@ const getAllCarts = async (req, res)=>{
     }
 }
 
-module.exports = { createCart, getCart, getAllCarts, deleteCart, updateCart }
+module.exports = { createCart, updateProductQuantity, getCart, getAllCarts, deleteCart, updateCart }

@@ -8,6 +8,7 @@ router.put("/:id", CartControllers.updateCart);
 router.delete("/:id", CartControllers.deleteCart);
 router.get("/:userId", CartControllers.getCart);
 router.get("/", CartControllers.getAllCarts);
+router.put("/updateQuantity/:id", CartControllers.updateProductQuantity);
 
 module.exports = router;
 
